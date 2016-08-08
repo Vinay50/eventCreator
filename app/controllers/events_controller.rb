@@ -1,10 +1,9 @@
 class EventsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :is_manager?
+	before_filter :verify_is_manager, :only => [:create, :new]
 
 	def index
 	  @events = Event.paginate(:page => params[:page])
-	  binding.pry
 	end
 
 	def new
@@ -37,8 +36,8 @@ class EventsController < ApplicationController
 
 	private
 
-	def is_manager?
-		current_user.is_manager
+	def verify_is_manager
+	  (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.is_manager?)
 	end
 		
 	def event_params
