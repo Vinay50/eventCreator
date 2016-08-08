@@ -1,0 +1,30 @@
+<% if !flash[:notice].blank? %>
+  <div class="alert alert-info">
+  <%= flash[:notice] %>
+  </div>
+<% end %>
+<div class ="col-md-4 col-md-offset-4">
+  <div class ="form_border">
+    <h2 class ="text-center">View Event</h2>
+      <div class="form_group">
+        <%= "Event Name:" %>
+        <%= @event.name %>
+      </div>
+      <div class="form-group">
+        <%= "Event Start Date:"%>
+        <%= @event.event_start_date  %>
+      </div>
+      <div class="form-group">
+        <%= "Event End Date:"%>
+        <%= @event.event_finish_date  %>
+      </div>
+      <div class="form-group">
+        <%= "Event Created Date:"%>
+        <%= @event.created_at  %>
+      </div>
+      <div class="form-group">
+        <%= "Event Image:" %>
+        <%= image_tag @event.avatar.url(:thumb).to_s, class: "img-thumbnail" %>
+      </div>
+  </div>
+</div>
